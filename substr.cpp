@@ -13,8 +13,13 @@ using namespace std;
 
 #define CHK(x) if(x<0) {cout <<__LINE__<<"FAIL"<<endl;}
 #define CHK2(val, fun) if((val=fun)<0) {cout << __LINE__<< "fail"<<endl;}
-int getNext()
+int getNext(char *p, int *next)
 {
+    int len = strlen(p);
+    int j = 0;
+    int k = -1;
+
+    return 0;
 }
 int GetSubStr(char *p , int b, int e , char *pRet, int &sublen)
 {
