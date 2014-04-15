@@ -13,6 +13,9 @@ using namespace std;
 
 #define CHK(x) if(x<0) {cout <<__LINE__<<"FAIL"<<endl;}
 #define CHK2(val, fun) if((val=fun)<0) {cout << __LINE__<< "fail"<<endl;}
+int getNext()
+{
+}
 int GetSubStr(char *p , int b, int e , char *pRet, int &sublen)
 {
 	bzero(pRet, 20);
