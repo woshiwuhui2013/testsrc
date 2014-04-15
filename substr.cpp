@@ -13,14 +13,35 @@ using namespace std;
 
 #define CHK(x) if(x<0) {cout <<__LINE__<<"FAIL"<<endl;}
 #define CHK2(val, fun) if((val=fun)<0) {cout << __LINE__<< "fail"<<endl;}
-int getNext(char *p, int *next)
-{
-    int len = strlen(p);
-    int j = 0;
-    int k = -1;
 
+int getNext(char *p, int *next, int len)
+{
+    if (p == NULL || next == NULL)
+    {
+        return -1;
+    }
+
+    int j   = 0;
+    int k   = -1;
+    next[0] = -1;
+    while (j < len -1 )
+    {
+        if (k== -1 || p[k] == p[j]) // k指示前缀最后一个与当前后面值相等的位置
+        {
+            ++j; // 当前要写的next的位置
+            ++k; // 应返回模式串的位置
+            next[j] = k; // 
+
+        }
+        // abab
+        else   // k 指示前面字串中内部存在相等字串的最长位置
+        {
+            k = next[k];  
+        }
+    }
     return 0;
 }
+
 int GetSubStr(char *p , int b, int e , char *pRet, int &sublen)
 {
 	bzero(pRet, 20);
