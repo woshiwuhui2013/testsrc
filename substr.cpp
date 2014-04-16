@@ -9,6 +9,8 @@
 #include<string.h>
 #include<string>
 #include<vector>
+#include<stdio.h>
+
 using namespace std;
 
 #define CHK(x) if(x<0) {cout <<__LINE__<<"FAIL"<<endl;}
@@ -33,7 +35,7 @@ int getNext(const char *p, int *next, int len)
 
         }
         // abab
-        else   // k 指示前面字串中内部存在相等字串的最长位置
+		else
         {
             k = next[k];  
         }
@@ -41,7 +43,7 @@ int getNext(const char *p, int *next, int len)
     return 0;
 }
 
-char* mystrstr(const char *dststr, const char *substr)
+const char* mystrstr(const char *dststr, const char *substr)
 {
     int dstlen = strlen(dststr);
     int sublen = strlen(substr);
@@ -56,28 +58,28 @@ char* mystrstr(const char *dststr, const char *substr)
         return dststr;
     }
 
-    char *next = new char[sublen+1];
+    int *next = new int[sublen+1];
     getNext(substr, next, sublen);
     
+	int i = 0;
+	int j = 0;
 
     //int tmp = i;
-    while(j<=sublen && i <= dstlen)
+    while(i <= dstlen)
     {
-        if (dststr[i] == substr[j])
+        if (j== -1 || dststr[i] == substr[j])
         {
-            ++i;
             ++j;
+			++i;
         }
         else
         {
             j = next[j];
         }
-    }
-
-    if (j > sublen)
-    {
-        // 如果找到
-        return dststr+i-sublen;        
+		if (j == sublen)
+		{
+			return dststr+i-j;
+		}
     }
 
     return NULL;    
@@ -134,8 +136,9 @@ int main()
 	//bzero(buff, 20);
 	char p[] = "abcbccbcabdabcdabcdcfabcd";
 	//CHK(substr(p, buff));
-	char *pos = mystrstr(p, "cbca");
-	cout << pos <<endl;
+    const char *pos = mystrstr(p, "cbca");
+	//cout << pos <<endl;
+	printf("%s",pos);
 	return 0;
 }
 
