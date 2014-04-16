@@ -13,8 +13,7 @@ using namespace std;
 
 #define CHK(x) if(x<0) {cout <<__LINE__<<"FAIL"<<endl;}
 #define CHK2(val, fun) if((val=fun)<0) {cout << __LINE__<< "fail"<<endl;}
-
-int getNext(char *p, int *next, int len)
+int getNext(const char *p, int *next, int len)
 {
     if (p == NULL || next == NULL)
     {
@@ -41,6 +40,49 @@ int getNext(char *p, int *next, int len)
     }
     return 0;
 }
+
+char* mystrstr(const char *dststr, const char *substr)
+{
+    int dstlen = strlen(dststr);
+    int sublen = strlen(substr);
+
+    if (dststr == NULL)
+    {
+        return NULL;
+    }
+
+    if (substr == NULL)
+    {
+        return dststr;
+    }
+
+    char *next = new char[sublen+1];
+    getNext(substr, next, sublen);
+    
+
+    //int tmp = i;
+    while(j<=sublen && i <= dstlen)
+    {
+        if (dststr[i] == substr[j])
+        {
+            ++i;
+            ++j;
+        }
+        else
+        {
+            j = next[j];
+        }
+    }
+
+    if (j > sublen)
+    {
+        // Èç¹ûÕÒµ½
+        return dststr+i-sublen;        
+    }
+
+    return NULL;    
+}
+
 
 int GetSubStr(char *p , int b, int e , char *pRet, int &sublen)
 {
@@ -88,11 +130,12 @@ int substr(char* pstr,  char *buff)
 }
 int main()
 {
-	char buff[20];
-	bzero(buff, 20);
+	//char buff[20];
+	//bzero(buff, 20);
 	char p[] = "abcbccbcabdabcdabcdcfabcd";
-	CHK(substr(p, buff));
-	cout << buff <<endl;
+	//CHK(substr(p, buff));
+	char *pos = mystrstr(p, "cbca");
+	cout << pos <<endl;
 	return 0;
 }
 
