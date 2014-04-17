@@ -67,7 +67,7 @@ int insert_node_to_tree(TREE_NODE * &head_node, int data)
         return 0;
     }
 
-    
+    _insert_node_to_tree(head_node, data, NULL);
 	return 0;
 }
 
@@ -114,7 +114,7 @@ void print_all_node(TREE_NODE *&head_node)
         return ;
     }
     print_all_node(head_node->left_child);
-    cout << head_node->data;
+    cout << head_node->data<<endl;
     print_all_node(head_node->right_child);
 }
 
@@ -128,6 +128,7 @@ int main()
     insert_node_to_tree(head, 0);
 
     print_all_node(head);
+	cout << "count:";
     cout << count_node_in_tree(head) <<endl;
     return 0;
 }
