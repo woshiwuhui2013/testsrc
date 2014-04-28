@@ -126,6 +126,117 @@ void shellsort(ARRAY* p)
 
 	}
 }
+#if 0
+int downsort(ARRAY *p, int i)
+{
+	int len = p->length;
+	pelem = i;
+
+	while(pelem < len)
+	{
+		child = pelem*2+1;
+		if (p->pbuf[chile]<p->pbuf[child+1])
+		{
+			++child;
+		}
+
+		if (p->pbuf[pelem]<p->pbuf[child])
+		{
+			int tmp = p->pbuf[pelem];
+			p->pbuf[elem]=p->pbuf[child];
+			p->pbuf[child]=tmp;
+		}
+		pelem = pelem*2+1;
+	}
+}
+#endif
+//
+//i is index n is array length
+int minheapfixdown(ARRAY *p, int i, int n)
+{
+	int parent = i;
+	int child = i*2+1;
+	int tmp = p->pbuf[i];
+	while(child<n)
+	{
+		if((child+1)<n)
+		{
+			if (p->pbuf[child]>p->pbuf[child+1])
+			{
+				++child;
+			}
+		}
+		if (tmp > p->pbuf[child])
+		{
+			p->pbuf[parent] = p->pbuf[child];
+		}
+		else
+		{
+			break;
+		}
+		parent = child;
+		child = 2*parent +1;
+	}
+	p->pbuf[parent] = tmp;
+}
+int makeheap(ARRAY *p)
+{
+	int len = p->length;
+	int last = ((len-2)/2);
+
+	while(last>=0)
+	{
+		minheapfixdown(p,last,p->length);
+#if 0
+		int j = last;
+	    int	k = 2*j+1;
+		int tmp = p->pbuf[j];
+		while(k <(len))
+		{
+			if ((k+1) < len)
+			{
+				if(p->pbuf[k]>p->pbuf[k+1])
+					k++;
+			}
+			if (tmp>p->pbuf[k])
+			{
+				p->pbuf[j]=p->pbuf[k];
+				j=k;
+			}
+			else
+			{
+				break;
+			}
+			k = 2*j+1;
+		}
+		p->pbuf[j] = tmp;
+#endif
+		last--;
+	}
+}
+#if 0
+int bucketsort(ARRAY* p)
+{
+
+	int len = p->length;
+	for (int i = (len-1)/2; i>=0;i--)
+	{
+		downsort(p, i);
+	}
+}
+#endif
+int heapsort(ARRAY * p)
+{
+	makeheap(p);	
+	int n = p->length;
+	for(int i = n-1; i >=0;i--)
+	{
+		int tmp = p->pbuf[i];
+		p->pbuf[i]= p->pbuf[0];
+		p->pbuf[0] = tmp;
+		minheapfixdown(p,0,i);
+	}
+}
 int main()
 {
 	ARRAY *p = new ARRAY(10);
@@ -142,7 +253,8 @@ int main()
     //bubblesort2(p);
 	//selectsort(p);
 	//insertsort(p);
-	shellsort(p);
+	//shellsort(p);
+	heapsort(p);
 	prtArray(p);
 	return 0;
 

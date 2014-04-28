@@ -12,5 +12,7 @@
 
 using namespace std;
 #define CHK(x) if(!x) { printf("%d:fail",__LINE__); exit(-1);}
+#define CHK1(x) if(x<0) { printf("%d:fail",__LINE__); exit(-1);}
+#define CHK2(x,ret) if((x=ret)<0) { printf("%d:fail",__LINE__); exit(-1);}
 
 
